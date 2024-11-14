@@ -7,77 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model audit {
-  auditID          Int       @id @default(autoincrement())
-  auditIP          String?   @db.VarChar(255)
-  auditURL         String?   @db.VarChar(255)
-  auditURLMethod   String?   @db.VarChar(255)
-  auditURLPayload  String?   @db.VarChar(255)
-  auditCreatedDate DateTime? @db.DateTime(0)
-}
-
-model lookup {
-  lookupID                                Int          @id @default(autoincrement())
-  lookupOrder                             Int?
-  lookupTitle                             String?      @db.VarChar(255)
-  lookupRefCode                           String?      @db.VarChar(255)
-  lookupValue                             String?      @db.VarChar(255)
-  lookupType                              String?      @db.VarChar(255)
-  lookupStatus                            String?      @db.VarChar(255)
-  lookupCreatedDate                       DateTime?    @db.DateTime(0)
-  lookupModifiedDate                      DateTime?    @db.DateTime(0)
-  assistant                               assistant[]
-  guide_chat                              guide_chat[]
-  project_project_projectTypeTolookup     project[]    @relation("project_projectTypeTolookup")
-  project_project_projectViewTypeTolookup project[]    @relation("project_projectViewTypeTolookup")
-  thread_thread_threadStatusTolookup      thread[]     @relation("thread_threadStatusTolookup")
-  thread_thread_providerIDTolookup        thread[]     @relation("thread_providerIDTolookup")
-}
-
-model role {
-  roleID             Int                  @id @default(autoincrement())
-  roleName           String?              @db.VarChar(255)
-  roleDescription    String?              @db.VarChar(255)
-  roleStatus         String?              @db.VarChar(255)
-  roleCreatedDate    DateTime?            @db.DateTime(0)
-  roleModifiedDate   DateTime?            @db.DateTime(0)
-  project_permission project_permission[]
-  userrole           userrole[]
-}
-
-model user {
-  userID             Int                  @id @default(autoincrement())
-  userSecretKey      String?              @db.VarChar(255)
-  userUsername       String?              @unique(map: "userUsername") @db.VarChar(255)
-  userPassword       String?              @db.VarChar(255)
-  userFullName       String?              @db.VarChar(255)
-  userEmail          String?              @db.VarChar(255)
-  userPhone          String?              @db.VarChar(255)
-  userStatus         String?              @db.VarChar(255)
-  userCreatedDate    DateTime?            @db.DateTime(0)
-  userModifiedDate   DateTime?            @db.DateTime(0)
-  chat               chat[]
-  collection_item    collection_item[]
-  document_template  document_template[]
-  project            project[]
-  project_permission project_permission[]
-  saved_prompt       saved_prompt[]
-  thread             thread[]
-  userrole           userrole[]
-}
-
-model userrole {
-  userRoleID          Int      @id @default(autoincrement())
-  userRoleUserID      Int      @default(0)
-  userRoleRoleID      Int      @default(0)
-  userRoleCreatedDate DateTime @db.DateTime(0)
-  role                role     @relation(fields: [userRoleRoleID], references: [roleID], onDelete: NoAction, onUpdate: NoAction, map: "FK_userrole_role")
-  user                user     @relation(fields: [userRoleUserID], references: [userID], onDelete: NoAction, onUpdate: NoAction, map: "FK_userrole_user")
-
-  @@index([userRoleRoleID], map: "FK_userrole_role")
-  @@index([userRoleUserID], map: "FK_userrole_user")
-}
-
 model assistant {
   assistantID               Int       @id @default(autoincrement())
   assistantProviderID       String?   @db.VarChar(255)
@@ -96,6 +25,15 @@ model assistant {
   thread                    thread[]
 
   @@index([assistantType], map: "assistantType")
+}
+
+model audit {
+  auditID          Int       @id @default(autoincrement())
+  auditIP          String?   @db.VarChar(255)
+  auditURL         String?   @db.VarChar(255)
+  auditURLMethod   String?   @db.VarChar(255)
+  auditURLPayload  String?   @db.VarChar(255)
+  auditCreatedDate DateTime? @db.DateTime(0)
 }
 
 model chat {
@@ -216,6 +154,24 @@ model guide_chat {
   @@index([guideChatModel], map: "guideChatModel")
 }
 
+model lookup {
+  lookupID                                Int          @id @default(autoincrement())
+  lookupOrder                             Int?
+  lookupTitle                             String?      @db.VarChar(255)
+  lookupRefCode                           String?      @db.VarChar(255)
+  lookupValue                             String?      @db.VarChar(255)
+  lookupType                              String?      @db.VarChar(255)
+  lookupStatus                            String?      @db.VarChar(255)
+  lookupCreatedDate                       DateTime?    @db.DateTime(0)
+  lookupModifiedDate                      DateTime?    @db.DateTime(0)
+  assistant                               assistant[]
+  guide_chat                              guide_chat[]
+  project_project_projectTypeTolookup     project[]    @relation("project_projectTypeTolookup")
+  project_project_projectViewTypeTolookup project[]    @relation("project_projectViewTypeTolookup")
+  thread                                  thread[]
+  thread_thread_providerIDTolookup        thread[]     @relation("thread_providerIDTolookup")
+}
+
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model project {
   projectID                                                          Int                  @id @default(autoincrement())
@@ -277,6 +233,17 @@ model repository {
   @@index([repositoryStatus], map: "repositoryStatus")
 }
 
+model role {
+  roleID             Int                  @id @default(autoincrement())
+  roleName           String?              @db.VarChar(255)
+  roleDescription    String?              @db.VarChar(255)
+  roleStatus         String?              @db.VarChar(255)
+  roleCreatedDate    DateTime?            @db.DateTime(0)
+  roleModifiedDate   DateTime?            @db.DateTime(0)
+  project_permission project_permission[]
+  userrole           userrole[]
+}
+
 model saved_prompt {
   promptID           Int       @id @default(autoincrement())
   userID             Int?
@@ -293,28 +260,61 @@ model saved_prompt {
 }
 
 model thread {
-  threadID                           Int         @id @default(autoincrement())
-  userID                             Int?
-  assistantID                        Int?
-  guideChatID                        Int?
-  providerID                         Int?
-  collectionName                     String?     @db.VarChar(255)
-  threadTitle                        String?     @db.VarChar(255)
-  threadProviderID                   String?     @unique(map: "threadOAIID") @db.VarChar(255)
-  threadSourceType                   String?     @db.VarChar(255)
-  threadStatus                       Int?
-  threadCreatedDate                  DateTime?   @db.DateTime(0)
-  threadModifiedDate                 DateTime?   @db.DateTime(0)
-  chat                               chat[]
-  assistant                          assistant?  @relation(fields: [assistantID], references: [assistantID], onDelete: NoAction, onUpdate: NoAction, map: "thread_ibfk_1")
-  user                               user?       @relation(fields: [userID], references: [userID], onDelete: NoAction, onUpdate: NoAction, map: "thread_ibfk_2")
-  lookup_thread_threadStatusTolookup lookup?     @relation("thread_threadStatusTolookup", fields: [threadStatus], references: [lookupID], onDelete: NoAction, onUpdate: NoAction, map: "thread_ibfk_3")
-  lookup_thread_providerIDTolookup   lookup?     @relation("thread_providerIDTolookup", fields: [providerID], references: [lookupID], onDelete: NoAction, onUpdate: NoAction, map: "thread_ibfk_4")
-  guide_chat                         guide_chat? @relation(fields: [guideChatID], references: [guideChatID], onDelete: NoAction, onUpdate: NoAction, map: "thread_ibfk_5")
+  threadID                         Int         @id @default(autoincrement())
+  userID                           Int?
+  assistantID                      Int?
+  guideChatID                      Int?
+  providerID                       Int?
+  collectionName                   String?     @db.VarChar(255)
+  threadTitle                      String?     @db.VarChar(255)
+  threadProviderID                 String?     @unique(map: "threadOAIID") @db.VarChar(255)
+  threadSourceType                 String?     @db.VarChar(255)
+  threadStatus                     Int?
+  threadCreatedDate                DateTime?   @db.DateTime(0)
+  threadModifiedDate               DateTime?   @db.DateTime(0)
+  chat                             chat[]
+  assistant                        assistant?  @relation(fields: [assistantID], references: [assistantID], onDelete: NoAction, onUpdate: NoAction, map: "thread_ibfk_1")
+  user                             user?       @relation(fields: [userID], references: [userID], onDelete: NoAction, onUpdate: NoAction, map: "thread_ibfk_2")
+  lookup                           lookup?     @relation(fields: [threadStatus], references: [lookupID], onDelete: NoAction, onUpdate: NoAction, map: "thread_ibfk_3")
+  lookup_thread_providerIDTolookup lookup?     @relation("thread_providerIDTolookup", fields: [providerID], references: [lookupID], onDelete: NoAction, onUpdate: NoAction, map: "thread_ibfk_4")
+  guide_chat                       guide_chat? @relation(fields: [guideChatID], references: [guideChatID], onDelete: NoAction, onUpdate: NoAction, map: "thread_ibfk_5")
 
   @@index([assistantID], map: "assistantID")
-  @@index([guideChatID], map: "guideChatID")
-  @@index([providerID], map: "providerID")
   @@index([threadStatus], map: "threadStatus")
   @@index([userID], map: "userID")
+  @@index([guideChatID], map: "guideChatID")
+  @@index([providerID], map: "providerID")
+}
+
+model user {
+  userID             Int                  @id @default(autoincrement())
+  userSecretKey      String?              @db.VarChar(255)
+  userUsername       String?              @unique(map: "userUsername") @db.VarChar(255)
+  userPassword       String?              @db.VarChar(255)
+  userFullName       String?              @db.VarChar(255)
+  userEmail          String?              @db.VarChar(255)
+  userPhone          String?              @db.VarChar(255)
+  userStatus         String?              @db.VarChar(255)
+  userCreatedDate    DateTime?            @db.DateTime(0)
+  userModifiedDate   DateTime?            @db.DateTime(0)
+  chat               chat[]
+  collection_item    collection_item[]
+  document_template  document_template[]
+  project            project[]
+  project_permission project_permission[]
+  saved_prompt       saved_prompt[]
+  thread             thread[]
+  userrole           userrole[]
+}
+
+model userrole {
+  userRoleID          Int      @id @default(autoincrement())
+  userRoleUserID      Int      @default(0)
+  userRoleRoleID      Int      @default(0)
+  userRoleCreatedDate DateTime @db.DateTime(0)
+  role                role     @relation(fields: [userRoleRoleID], references: [roleID], onDelete: NoAction, onUpdate: NoAction, map: "FK_userrole_role")
+  user                user     @relation(fields: [userRoleUserID], references: [userID], onDelete: NoAction, onUpdate: NoAction, map: "FK_userrole_user")
+
+  @@index([userRoleRoleID], map: "FK_userrole_role")
+  @@index([userRoleUserID], map: "FK_userrole_user")
 }
