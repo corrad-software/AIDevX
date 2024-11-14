@@ -231,6 +231,64 @@
           "$ref": "#/definitions/user"
         }
       }
+    },
+    "customer": {
+      "type": "object",
+      "properties": {
+        "cust_id": {
+          "type": "integer"
+        },
+        "cust_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cust_username": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cust_ic_number": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cust_address": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cust_dob": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "cust_gender": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cust_status": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "cust_created_datetime": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      }
     }
   },
   "type": "object",
@@ -249,6 +307,9 @@
     },
     "userrole": {
       "$ref": "#/definitions/userrole"
+    },
+    "customer": {
+      "$ref": "#/definitions/customer"
     }
   }
 }

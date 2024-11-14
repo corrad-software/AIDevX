@@ -31,14 +31,14 @@ export default defineNuxtConfig({
     },
   },
   head: {
-    title: "corrad",
+    title: "aidevx",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       {
         hid: "description",
         name: "description",
-        content: "corrad",
+        content: "aidevx",
       },
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
@@ -68,8 +68,8 @@ export default defineNuxtConfig({
       type: "module",
     },
     manifest: {
-      name: "corrad",
-      short_name: "corrad",
+      name: "aidevx",
+      short_name: "aidevx",
       theme_color: "#202D3B",
       background_color: "#FAFAFA",
       display: "standalone",

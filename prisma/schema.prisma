@@ -68,3 +68,15 @@ model userrole {
   @@index([userRoleRoleID], map: "FK_userrole_role")
   @@index([userRoleUserID], map: "FK_userrole_user")
 }
+
+model customer {
+  cust_id               Int       @id @default(autoincrement())
+  cust_name             String?   @db.VarChar(255)
+  cust_username         String?   @db.VarChar(255)
+  cust_ic_number        String?   @db.VarChar(255)
+  cust_address          String?   @db.VarChar(255)
+  cust_dob              DateTime? @db.Date
+  cust_gender           String?   @db.VarChar(255)
+  cust_status           Int?
+  cust_created_datetime DateTime? @db.DateTime(0)
+}
