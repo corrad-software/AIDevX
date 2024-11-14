@@ -6,9 +6,10 @@ definePageMeta({
   layout: "empty",
   middleware: ["auth"],
   requiresAuth: true,
+  redirect: "/ai",
 });
 
-if (process.client) window.location.href = "/ai";
+// if (process.client) window.location.href = "/ai";
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 <script setup>
 definePageMeta({
-  title: "CORRAD Editor",
+  title: "AIDevX Editor",
   layout: "ai",
   middleware: ["auth"],
   requiresAuth: true,

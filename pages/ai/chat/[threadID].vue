@@ -408,7 +408,7 @@ const processFile = async (file) => {
 
       let url =
         ENV.public.server === "false"
-          ? "https://app.corrad.ai/api/ai/image/upload"
+          ? "https://aidevx.corrad.ai/api/ai/image/upload"
           : "/api/ai/image/upload";
 
       const { data } = await useFetch(url, {
@@ -1639,7 +1639,7 @@ const selectRelatedQuestion = (questionObj) => {
         <h4
           class="text-[rgba(var(--text-muted))] text-sm font-bold uppercase tracking-wider mb-4 text-center"
         >
-          CORRAD AI
+          AIDevX AI
         </h4>
       </section>
       <div class="flex items-center justify-center h-[80vh]">

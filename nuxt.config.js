@@ -43,14 +43,14 @@ export default defineNuxtConfig({
     pageTransition: { name: "page", mode: "out-in" },
   },
   head: {
-    title: "CORRAD AI",
+    title: "AIDevX AI",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       {
         hid: "description",
         name: "description",
-        content: "CORRAD AI",
+        content: "AIDevX AI",
       },
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
@@ -80,8 +80,8 @@ export default defineNuxtConfig({
       type: "module",
     },
     manifest: {
-      name: "CORRAD AI",
-      short_name: "CORRAD AI",
+      name: "AIDevX AI",
+      short_name: "AIDevX AI",
       theme_color: "#202D3B",
       background_color: "#FAFAFA",
       display: "standalone",

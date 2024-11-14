@@ -121,7 +121,7 @@ const handleCreateRoom = async (formData) => {
       <h4
         class="text-[rgba(var(--text-muted))] text-sm font-bold uppercase tracking-wider my-8 text-center"
       >
-        Welcome to the CORRAD AI
+        Welcome to the AIDevX AI
       </h4>
     </section>
 

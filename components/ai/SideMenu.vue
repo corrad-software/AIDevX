@@ -1,8 +1,8 @@
 <script setup>
 import { useUserStore } from "~/stores/user";
-import logoLightSrc from "~/assets/img/logo/logo-word-black-ai.svg";
-import logoOnlySrc from "~/assets/img/logo/logo.svg";
-import logoDarkSrc from "~/assets/img/logo/logo-word-white-ai.svg";
+import logoLightSrc from "~/assets/img/logo/logo.png";
+import logoOnlySrc from "~/assets/img/logo/logo.png";
+import logoDarkSrc from "~/assets/img/logo/logo.png";
 // import defaultAvatar from "~/assets/img/avatar/bot.png";
 
 defineProps({
@@ -166,14 +166,14 @@ const toggleTheme = () => {
   theme.classList.toggle("ai-theme-dark");
 
   const isDark = theme.classList.contains("ai-theme-dark");
-  localStorage.setItem("corradai-theme", isDark ? "dark" : "light");
+  localStorage.setItem("ai-theme", isDark ? "dark" : "light");
 
   logoSrc.value = isDark ? logoDarkSrc : logoLightSrc;
 };
 
 // Function to set initial theme
 const setInitialTheme = () => {
-  const savedTheme = localStorage.getItem("corradai-theme") || "light";
+  const savedTheme = localStorage.getItem("ai-theme") || "light";
   const theme = document.querySelector(".ai-theme");
 
   if (savedTheme === "dark") {

@@ -3,7 +3,7 @@
 module.exports = {
   apps: [
     {
-      name: "CORRAD AI",
+      name: "AIDevX AI",
       port: "3000",
       exec_mode: "cluster",
       instances: "max",

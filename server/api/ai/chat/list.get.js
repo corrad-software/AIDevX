@@ -36,7 +36,7 @@ export default defineEventHandler(async (event) => {
         chatRole: "assistant",
         NOT: {
           thread: {
-            lookup: {
+            lookup_thread_threadStatusTolookup: {
               lookupID: 4,
             },
           },
