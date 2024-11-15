@@ -135,7 +135,7 @@ const filteredPrompts = computed(() => {
 });
 
 const sidebarClasses = computed(() => {
-  return showDocumentSidebar.value ? "w-1/4" : "w-0";
+  return showDocumentSidebar.value ? "w-full md:w-1/4 z-50" : "w-0";
 });
 
 // Add new refs for animation
@@ -343,6 +343,7 @@ watch(
   async (newVal, oldVal) => {
     if (oldVal !== newVal) {
       await changeCollection(newVal);
+      showDocumentSidebar.value = false;
     }
   }
 );
