@@ -189,7 +189,7 @@ const handleCreateRoom = async (formData) => {
         }}
       </h2>
       <rs-button
-        v-if="hasPermission() && activeTab !== 'tools'"
+        v-if="hasPermission() && activeTab !== 'tools' && activeTab !== 'guideChats'"
         class="flex items-center gap-2"
         @click="
           activeTab == 'assistants'
