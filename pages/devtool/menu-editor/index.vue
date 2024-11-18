@@ -642,11 +642,11 @@ watch(
           <FormKit
             type="text"
             label="Title"
-            :validation="[['required'], ['matches', '/^[a-zA-Z0-9]+$/']]"
+            :validation="[['required'], ['matches', '/^[a-zA-Z0-9\s_-]+$/']]"
             :validation-messages="{
               required: 'Title is required',
               matches:
-                'Title contains invalid characters. Only letters and numbers are allowed.',
+                'Title contains invalid characters. Only letters, numbers, spaces, underscores and dashes are allowed.',
             }"
             v-model="showModalEditForm.title"
           />
@@ -695,11 +695,11 @@ watch(
           <FormKit
             type="text"
             label="Title"
-            :validation="[['required'], ['matches', '/^[a-zA-Z0-9]+$/']]"
+            :validation="[['required'], ['matches', '/^[a-zA-Z0-9\s_-]+$/']]"
             :validation-messages="{
               required: 'Title is required',
               matches:
-                'Title contains invalid characters. Only letters and numbers are allowed.',
+                'Title contains invalid characters. Only letters, numbers, spaces, underscores and dashes are allowed.',
             }"
             v-model="showModalAddForm.title"
           />
