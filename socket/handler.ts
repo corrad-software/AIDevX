@@ -207,7 +207,9 @@ export const socketHandler = async (io: Server) => {
         user,
         message,
         assistantMessageId,
+        tryAgain,
       }) => {
+
         try {
           // Check thread source type and provider
           const thread = await prisma?.thread.findFirst({
@@ -269,18 +271,20 @@ export const socketHandler = async (io: Server) => {
             }
           }
 
-          // Delete the previous assistant message from the database
-          await prisma?.chat.deleteMany({
-            where: {
-              chatProviderMessageID: assistantMessageId,
+          if (!tryAgain && assistantMessageId) {
+            // Delete the previous assistant message from the database
+            await prisma?.chat.deleteMany({
+              where: {
+                chatProviderMessageID: assistantMessageId,
               thread: {
                 threadProviderID: threadID,
               },
               project: {
                 projectUniqueID: projectID,
-              },
-            },
-          });
+                },
+              }
+            });
+          }
         } catch (error) {
           console.error("Error regenerating response:", error);
           io.to(threadID).emit(

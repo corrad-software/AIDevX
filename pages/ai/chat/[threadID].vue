@@ -804,6 +804,38 @@ const regenerateResponse = async (index) => {
       user: user.value,
       message: userMessage,
       assistantMessageId: assistantMessage.chatProviderMessageID,
+      tryAgain: false,
+    });
+
+    // Start streaming new response
+    isStreaming.value = true;
+  } catch (error) {
+    console.error("Error regenerating response:", error);
+    messages.value.push({
+      sender: "assistant",
+      content: "",
+      error: "Failed to regenerate response. Please try again.",
+    });
+  }
+};
+
+const tryAgainResponse = async (index) => {
+  try {
+    const userMessage = messages.value[index - 1]; // Assuming the user message is always before the assistant's
+    const assistantMessage = messages.value[index];
+
+    // Remove the assistant's message from the UI
+    messages.value.splice(index, 1);
+
+    // Emit event to regenerate response
+    $io.emit("regenerateResponse", {
+      threadID,
+      assistantID: assistantID.value,
+      projectID: projectID.value,
+      user: user.value,
+      message: userMessage,
+      assistantMessageId: assistantMessage.chatProviderMessageID,
+      tryAgain: true,
     });
 
     // Start streaming new response
@@ -1047,7 +1079,7 @@ const selectRelatedQuestion = (questionObj) => {
             <p class="font-bold">Error</p>
             <p>{{ message.error }}</p>
             <button
-              @click="regenerateResponse(index)"
+              @click="tryAgainResponse(index)"
               class="mt-2 text-sm text-red-600 hover:text-red-800 flex items-center"
             >
               <Icon name="mdi:refresh" class="w-4 h-4 mr-1" />
