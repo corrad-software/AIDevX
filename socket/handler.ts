@@ -209,7 +209,6 @@ export const socketHandler = async (io: Server) => {
         assistantMessageId,
         tryAgain,
       }) => {
-
         try {
           // Check thread source type and provider
           const thread = await prisma?.thread.findFirst({
@@ -276,13 +275,13 @@ export const socketHandler = async (io: Server) => {
             await prisma?.chat.deleteMany({
               where: {
                 chatProviderMessageID: assistantMessageId,
-              thread: {
-                threadProviderID: threadID,
-              },
-              project: {
-                projectUniqueID: projectID,
+                thread: {
+                  threadProviderID: threadID,
                 },
-              }
+                project: {
+                  projectUniqueID: projectID,
+                },
+              },
             });
           }
         } catch (error) {
@@ -769,6 +768,7 @@ async function handleOpenAIChat({
         const content = chunk.choices[0]?.delta?.content || "";
         if (content) {
           buffer += content;
+          fullResponse += content;
         }
 
         // Only emit when buffer reaches certain size
@@ -997,6 +997,7 @@ async function handleClaudeChat({
         const content = chunk.delta?.text || "";
         if (content) {
           buffer += content;
+          fullResponse += content;
 
           // Only emit when buffer reaches certain size
           if (buffer.length >= BATCH_SIZE) {
