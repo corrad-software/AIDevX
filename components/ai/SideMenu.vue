@@ -1,8 +1,8 @@
 <script setup>
 import { useUserStore } from "~/stores/user";
-import logoLightSrc from "~/assets/img/logo/logo.png";
-import logoOnlySrc from "~/assets/img/logo/logo.png";
-import logoDarkSrc from "~/assets/img/logo/logo.png";
+import logoLightSrc from "~/assets/img/logo/logo.svg";
+import logoOnlySrc from "~/assets/img/logo/logo.svg";
+import logoDarkSrc from "~/assets/img/logo/logo.svg";
 // import defaultAvatar from "~/assets/img/avatar/bot.png";
 
 defineProps({
@@ -240,10 +240,10 @@ onUnmounted(() => {
       />
     </button>
 
-    <nuxt-link to="/ai" class="flex justify-center items-center mb-4">
+    <nuxt-link to="/ai" class="flex justify-center items-center mb-6">
       <img
         id="logo"
-        class="h-10 block"
+        class="h-9 block"
         :class="{ 'w-8 h-8 object-contain': isMinimized && isDesktop }"
         :src="isMinimized && isDesktop ? logoOnlySrc : logoSrc"
         alt="Logo"
@@ -374,7 +374,7 @@ onUnmounted(() => {
             </button>
           </nuxt-link>
           <nuxt-link
-            class="md:col-span-4"
+            class="md:col-span-3"
             :to="hasPermission() ? '/ai/settings' : '/ai/settings/project'"
           >
             <button
