@@ -572,7 +572,9 @@ watch(
               <!-- Available Menus Section -->
               <div>
                 <div class="mb-4">
-                  <h3 class="text-lg font-semibold mb-2">Available Menu Items</h3>
+                  <h3 class="text-lg font-semibold mb-2">
+                    Available Menu Items
+                  </h3>
                   <p class="text-sm text-gray-600 dark:text-gray-400">
                     Drag items from here to build your navigation menu
                   </p>
@@ -600,7 +602,9 @@ watch(
                       >
                         <div class="flex justify-between items-center">
                           <div>
-                            <p class="font-medium">{{ kebabtoTitle(element.name) }}</p>
+                            <p class="font-medium">
+                              {{ kebabtoTitle(element.name) }}
+                            </p>
                             <p class="text-sm text-gray-600 dark:text-gray-400">
                               {{ element.path }}
                             </p>
@@ -648,7 +652,11 @@ watch(
                     />
                   </rs-card>
                 </NuxtScrollbar>
-                <pre v-else class="p-4 bg-gray-100 dark:bg-gray-800 rounded-md overflow-auto" v-html="JSON.stringify(sideMenuList, null, 2)"></pre>
+                <pre
+                  v-else
+                  class="p-4 bg-gray-100 dark:bg-gray-800 rounded-md overflow-auto"
+                  v-html="JSON.stringify(sideMenuList, null, 2)"
+                ></pre>
               </div>
             </div>
           </rs-tab-item>
