@@ -22,8 +22,8 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: "page", mode: "out-in" },
   },
-  vite:{
-    server:{
+  vite: {
+    server: {
       watch: {
         usePolling: true,
         interval: 1000,
@@ -546,6 +546,9 @@ export default defineNuxtConfig({
         xssValidator: false,
         requestSizeLimiter: false,
       },
+    },
+    "/devtool/code-playground/**": {
+      ssr: false,
     },
   },
 });

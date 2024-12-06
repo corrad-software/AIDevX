@@ -244,6 +244,12 @@
             "null"
           ]
         },
+        "cust_type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "cust_username": {
           "type": [
             "string",

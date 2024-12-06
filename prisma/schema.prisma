@@ -72,6 +72,7 @@ model userrole {
 model customer {
   cust_id               Int       @id @default(autoincrement())
   cust_name             String?   @db.VarChar(255)
+  cust_type             String?   @db.VarChar(255)
   cust_username         String?   @db.VarChar(255)
   cust_ic_number        String?   @db.VarChar(255)
   cust_address          String?   @db.VarChar(255)
